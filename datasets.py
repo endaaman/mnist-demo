@@ -25,4 +25,4 @@ class MNISTDataset(Dataset):
 
 
 if __name__ == '__main__':
-    ds = MNISTDataset(train=True)
+    ds = MNISTDataset(train=True, limit=1000)

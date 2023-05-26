@@ -7,17 +7,17 @@ class LinearModel(nn.Module):
     def __init__(self):
         super().__init__()
         self.layers = nn.Sequential(
-            nn.Linear(28 * 28, 64),
+            nn.Linear(28 * 28, 256),
             nn.ReLU(inplace=True),
-            nn.Linear(64, 64),
+            nn.Linear(256, 256),
             nn.ReLU(inplace=True),
-            nn.Linear(64, 10),
+            nn.Linear(256, 10),
         )
 
     def forward(self, x):
         x = x.flatten(1)
         x = self.layers(x)
-        x = torch.softmax(x, dim=1)
+        # x = torch.softmax(x, dim=1)
         return x
 
 
@@ -39,7 +39,7 @@ class ConvModel(nn.Module):
         x = self.pool(x)
         x = x.flatten(1)
         x = self.classifier(x)
-        x = torch.softmax(x, dim=1)
+        # x = torch.softmax(x, dim=1)
         return x
 
 if __name__ == '__main__':

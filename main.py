@@ -48,21 +48,27 @@ def train(model_name, epoch):
 
     for e in range(epoch):
         train_losses = []
-        for (x, gts) in tqdm(train_loader):
+        t = tqdm(train_loader)
+        for (x, gts) in t:
             optimizer.zero_grad()
             preds = model(x)
             loss = criterion(preds, gts)
             loss.backward()
             optimizer.step()
             train_losses.append(loss.item())
+            t.set_description(f'loss: {loss.item():.3f}')
+            t.refresh()
         train_loss = np.mean(train_losses)
 
         val_losses = []
-        for (x, gts) in tqdm(val_loader):
+        t = tqdm(val_loader)
+        for (x, gts) in t:
             with torch.set_grad_enabled(False):
                 preds = model(x)
                 loss = criterion(preds, gts)
                 val_losses.append(loss.item())
+            t.set_description(f'loss: {loss.item():.3f}')
+            t.refresh()
 
         val_loss = np.mean(val_losses)
         writer.add_scalar('loss/train', train_loss, e)
