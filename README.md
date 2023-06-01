@@ -1,5 +1,5 @@
 # MNIST demo
 
-```
-$ pip install torch torchvision numpy matplotlib click
+```sh
+$ pip install -r ./requirements.txt
 ```
